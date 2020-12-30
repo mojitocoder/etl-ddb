@@ -1,0 +1,22 @@
+{
+  "name": "etl-ddb",
+  "version": "1.0.0",
+  "description": "ETL data to DynamoDB",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Quynh Nguyen",
+  "license": "ISC",
+  "devDependencies": {
+    "aws-sdk": "^2.817.0",
+    "eslint": "^7.16.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1"
+  },
+  "dependencies": {
+    "extract-zip": "^2.0.1"
+  }
+}

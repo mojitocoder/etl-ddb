@@ -1,0 +1,21 @@
+service: etl-ddb
+frameworkVersion: '2'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: eu-west-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:BatchWrite*
+      Resource: 'arn:aws:dynamodb:eu-west-1:xxx:table/Postcodes'
+
+functions:
+  loadPostcodes:
+    handler: loadPostcodes.handle
+    timeout: 900
+
+package:
+  exclude:
+    - local_scripts/**
