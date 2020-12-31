@@ -22,34 +22,28 @@ ETL Data to DynamoDB
    cd local_scripts
    node createTable.js
    ```
+   
+   
 
 ## Using Lambda to load UK postcodes to DynamoDB
 
-1. Get the ARN of DynamoDB's `Postcodes` table
+1. Deploy the project
 
    ```bash
-   aws dynamodb --region eu-west-1 describe-table --table-name Postcodes
+   npm run sls -- deploy
    ```
 
-   `TableArn` is the value you need to keep. It should look like `arn:aws:dynamodb:eu-west-1:xxxxxxxxxxxx:table/Postcodes`
+   The Serverless framework will create a ``Postcodes` table in DynamoDB and a Lambda named `etl-ddb-dev-loadPostcodes`.
 
-2. Grant the to-be-created Lambda permission to insert data into DynamoDB by putting the ARN retrieved in the previous step to `Resource` value on line 12 of `serverless.yml`.
-
-3. Deploy the serverless project, make sure you run this from the root folder of the project, e.g. `etl-ddb/` (and not inside `etl-ddb/local_scripts/`)
-
-   ```bash
-   serverless deploy
-   ```
-
-   The Serverless framework will go ahead and create a Lambda for us with the name of `etl-ddb-dev-loadPostcodes`
-
-4. Trigger the Lambda to load data into the `Postcodes` table of DynamoDB
+2. Trigger the Lambda to load data into the `Postcodes` table of DynamoDB
 
    ```bash
    aws lambda invoke --region eu-west-1 \
    --function-name etl-ddb-dev-loadPostcodes out --log-type Tail \
    --query 'LogResult' --output text |  base64 -d
    ```
+   
+   
 
 ## Run local Node.js programs to load UK postcodes to DynamoDB
 
@@ -62,16 +56,30 @@ If you prefer not to use Lambda to load data to DynamoDB, you can do it from you
    cd local_scripts
    ```
    
+   
+   
 2. Download UK postcode geo data file
 
    ```bash
-   curl https://www.freemaptools.com/download/full-postcodes/ukpostcodes.zip --    output ukpostcodes.zip
+   curl https://www.freemaptools.com/download/full-postcodes/ukpostcodes.zip --output ukpostcodes.zip
    ```
+
+   
 
 3. Unzip the file
    ```bash
    unzip -a ukpostcodes.zip
    ```
+   
+   
+   
+4. If you have not deployed the serverless project, you will need to create the `Postcodes` table in DynamoDB manually
+
+   ```bash
+   node createTable.js
+   ```
+
+   
 
 There are three versions of the program to run:
 
@@ -86,6 +94,8 @@ There are three versions of the program to run:
    ```bash
    aws dynamodb --region eu-west-1 describe-table --table-name    Postcodes
    ```
+
+   
 
 2. Scan the DynamoDB table
 
@@ -106,3 +116,5 @@ There are three versions of the program to run:
    ```bash
    aws dynamodb list-tables --region eu-west-1
    ```
+   
+   
