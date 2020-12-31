@@ -1,5 +1,7 @@
-ETL Data to DynamoDB
+Extract Transform Load Data to DynamoDB
 ===
+
+This project contain the source code for the article [How to quickly load a large amount of records to AWS DynamoDB](https://mojitocoder.medium.com/how-to-quickly-load-a-large-amount-of-records-to-aws-dynamodb-94524ea249dc).
 
 ## Initial setup
 
