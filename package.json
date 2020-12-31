@@ -4,7 +4,7 @@
   "description": "ETL data to DynamoDB",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sls": "serverless"
   },
   "author": "Quynh Nguyen",
   "license": "ISC",
@@ -14,7 +14,8 @@
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1"
+    "eslint-plugin-promise": "^4.2.1",
+    "serverless": "^2.17.0"
   },
   "dependencies": {
     "extract-zip": "^2.0.1"

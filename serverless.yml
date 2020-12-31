@@ -9,7 +9,7 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action: dynamodb:BatchWrite*
-      Resource: 'arn:aws:dynamodb:eu-west-1:xxx:table/Postcodes'
+      Resource: !GetAtt PostcodesTable.Arn
 
 functions:
   loadPostcodes:
@@ -19,3 +19,17 @@ functions:
 package:
   exclude:
     - local_scripts/**
+
+resources:
+  Resources:
+    PostcodesTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: postcode
+            AttributeType: S
+        KeySchema:
+          - AttributeName: postcode
+            KeyType: HASH
+        TableName: Postcodes
